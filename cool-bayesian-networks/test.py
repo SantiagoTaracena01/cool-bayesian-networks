@@ -1,11 +1,16 @@
 from bayesian_network import BayesianNetwork
 
-INPUT_PATH = "./input/red_1.txt"
+# NODES = ["B", "E", "A", "J", "M"]
+# EDGES = [("B", "A"), ("E", "A"), ("A", "J"), ("A", "M")]
+
+NODES = ["A", "B", "C"]
+EDGES = [("A", "C"), ("B", "C")]
+INPUT_PATH = "./input/mi_red.txt"
 
 network = BayesianNetwork(
-    nodes=["B", "E", "A", "J", "M"],
-    edges=[("B", "A"), ("E", "A"), ("A", "J"), ("A", "M")],
+    nodes=NODES,
+    edges=EDGES,
     probabilities=INPUT_PATH
 )
 
-# network.info()
+network.info()

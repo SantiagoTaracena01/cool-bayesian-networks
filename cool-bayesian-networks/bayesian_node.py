@@ -5,4 +5,6 @@ class BayesianNode(object):
         self.__probability_values = probability_values
         self.__parents = parents
         self.__children = children
-        print(label, probability_values, parents, children)
+
+    def __repr__(self):
+        return f"BayesianNode({self.__label}, {self.__probability_values}, {self.__parents}, {self.__children})"

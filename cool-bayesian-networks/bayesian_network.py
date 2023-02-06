@@ -1,16 +1,20 @@
 from bayesian_node import BayesianNode
+import utils
 
 class BayesianNetwork(object):
 
     def __init__(self, nodes, edges, probabilities):
+
         self.__nodes = nodes
         self.__edges = edges
         self.__parents = self.__get_parents()
         self.__children = self.__get_children()
         self.__middle_children = list(set(self.__parents) & set(self.__children))
+
         for node in self.__middle_children:
             self.__parents.remove(node)
             self.__children.remove(node)
+
         self.__probabilities = self.__process_probabilities(probabilities)
         self.__bayesian_nodes = self.__create_bayesian_nodes()
 
@@ -33,71 +37,38 @@ class BayesianNetwork(object):
         return children
 
     def __process_probabilities(self, probabilities):
+
         probabilities_struct = []
+
         with open(probabilities, "r") as file:
             probabilities = file.readlines()
-        for line in probabilities:
-            line = [self.__replace_all(probability, [" ", "P", "(", ")", "\n"], "") for probability in line]
-            line = "".join([char for char in line if (char != "")])
-            line = line.split("=")
-            line = [*line[0].split("|"), line[1]]
-            probability_dict = { "probability_of": line[0], "given": line[1], "equals": line[2] } if (len(line) == 3) else { "probability_of": line[0], "given": "", "equals": line[1] }
-            probabilities_struct.append(probability_dict)
-        return probabilities_struct
 
-    def __replace_all(self, text, chars, replacement):
-        for char in chars:
-            text = text.replace(char, replacement)
-        return text
+        for line in probabilities:
+            probability_dict = utils.get_probability_dict(line)
+            probabilities_struct.append(probability_dict)
+
+        return probabilities_struct
 
     def __create_bayesian_nodes(self):
         bayesian_nodes = []
         for node in self.__nodes:
             if (node in self.__parents):
                 probability_values = [[0, 0]]
-                for probability in self.__probabilities:
-                    if (probability["probability_of"] == node):
-                        probability_value = float(probability["equals"])
-                        probability_values[0][1] = round(probability_value, 3)
-                        probability_values[0][0] = round(1 - probability_value, 3)
-                    elif (probability["probability_of"] == f"!{node}"):
-                        probability_value = float(probability["equals"])
-                        probability_values[0][0] = round(probability_value, 3)
-                        probability_values[0][1] = round(1 - probability_value, 3)
-                new_node = BayesianNode(
-                    label=node,
+                new_node = utils.get_parent_node(
+                    node=node,
+                    probabilities=self.__probabilities,
                     probability_values=probability_values,
-                    parents=[],
                     children=self.__get_personal_children(node),
                 )
                 bayesian_nodes.append(new_node)
             elif (node in self.__children):
                 parents = self.__get_personal_parents(node)
-                parents_length = len(parents)
-                probability_values = [[0, 0] for _ in range(2 ** parents_length)]
-                for probability in self.__probabilities:
-                    for index, parent in enumerate(parents):
-                        if (probability["probability_of"] == node and probability["given"] == parent):
-                            probability_value = float(probability["equals"])
-                            probability_values[index - 1][1] = round(probability_value, 3)
-                            probability_values[index - 1][0] = round(1 - probability_value, 3)
-                        elif (probability["probability_of"] == f"!{node}" and probability["given"] == parent):
-                            probability_value = float(probability["equals"])
-                            probability_values[index - 1][0] = round(probability_value, 3)
-                            probability_values[index - 1][1] = round(1 - probability_value, 3)
-                        elif (probability["probability_of"] == node and probability["given"] == f"!{parent}"):
-                            probability_value = float(probability["equals"]) # 0.05 = [0][1]
-                            probability_values[index][1] = round(probability_value, 3)
-                            probability_values[index][0] = round(1 - probability_value, 3)
-                        elif (probability["probability_of"] == f"!{node}" and probability["given"] == f"!{parent}"):
-                            probability_value = float(probability["equals"])
-                            probability_values[index][0] = round(probability_value, 3)
-                            probability_values[index][1] = round(1 - probability_value, 3)
-                new_node = BayesianNode(
-                    label=node,
+                probability_values = [[0, 0] for _ in range(2 ** len(parents))]
+                new_node = utils.get_child_node(
+                    node=node,
+                    probabilities=self.__probabilities,
                     probability_values=probability_values,
                     parents=parents,
-                    children=[],
                 )
                 bayesian_nodes.append(new_node)
         return bayesian_nodes
@@ -117,8 +88,7 @@ class BayesianNetwork(object):
         return personal_children
 
     def info(self):
-        print("Nodes: ", self.__nodes)
-        print("Edges: ", self.__edges)
-        print("Parents: ", self.__parents)
-        print("Children: ", self.__children)
-        print("Middle Child: ", self.__middle_children)
+        for edge in self.__edges:
+            print(f"{edge[0]} -> {edge[1]}")
+        for node in self.__bayesian_nodes:
+            print(node)
