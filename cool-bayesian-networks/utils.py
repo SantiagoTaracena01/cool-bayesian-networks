@@ -16,15 +16,11 @@ def get_parent_node(node, probabilities, probability_values, children):
 
     for probability in probabilities:
 
-        if (probability["probability_of"] == node):
+        if (node in probability["probability_of"]):
+            probability_index = 0 if (probability["probability_of"].startswith("!")) else 1
             probability_value = float(probability["equals"])
-            probability_values[0][1] = round(probability_value, 3)
-            probability_values[0][0] = round(1 - probability_value, 3)
-
-        elif (probability["probability_of"] == f"!{node}"):
-            probability_value = float(probability["equals"])
-            probability_values[0][0] = round(probability_value, 3)
-            probability_values[0][1] = round(1 - probability_value, 3)
+            probability_values[0][probability_index] = round(probability_value, 3)
+            probability_values[0][int(not probability_index)] = round((1 - probability_value), 3)
 
     return BayesianNode(
         label=node,

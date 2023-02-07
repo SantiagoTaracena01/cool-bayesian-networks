@@ -61,16 +61,16 @@ class BayesianNetwork(object):
                     children=self.__get_personal_children(node),
                 )
                 bayesian_nodes.append(new_node)
-            elif (node in self.__children):
-                parents = self.__get_personal_parents(node)
-                probability_values = [[0, 0] for _ in range(2 ** len(parents))]
-                new_node = utils.get_child_node(
-                    node=node,
-                    probabilities=self.__probabilities,
-                    probability_values=probability_values,
-                    parents=parents,
-                )
-                bayesian_nodes.append(new_node)
+            # elif (node in self.__children):
+            #     parents = self.__get_personal_parents(node)
+            #     probability_values = [[0, 0] for _ in range(2 ** len(parents))]
+            #     new_node = utils.get_child_node(
+            #         node=node,
+            #         probabilities=self.__probabilities,
+            #         probability_values=probability_values,
+            #         parents=parents,
+            #     )
+            #     bayesian_nodes.append(new_node)
         return bayesian_nodes
 
     def __get_personal_parents(self, node):
