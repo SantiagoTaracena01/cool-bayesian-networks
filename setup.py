@@ -3,11 +3,11 @@ from setuptools import find_packages, setup
 
 HERE = pathlib.Path(__file__).parent
 
-VERSION = '0.0.1' #Muy importante, deberéis ir cambiando la versión de vuestra librería según incluyáis nuevas funcionalidades
-PACKAGE_NAME = 'cool-bayesian-networks' #Debe coincidir con el nombre de la carpeta 
-AUTHOR = 'Pedro Arriola, Oscar López, Yong Park & Santiago Taracena' #Modificar con vuestros datos
-AUTHOR_EMAIL = 'tar20017@uvg.edu.gt' #Modificar con vuestros datos
-URL = 'https://github.com/SantiagoTaracena01/cool-bayesian-networks.git' #Modificar con vuestros datos
+VERSION = '0.0.1' 
+PACKAGE_NAME = 'cool-bayesian-networks' 
+AUTHOR = 'Pedro Arriola, Oscar López, Yong Park & Santiago Taracena' 
+AUTHOR_EMAIL = 'tar20017@uvg.edu.gt' 
+URL = 'https://github.com/SantiagoTaracena01/cool-bayesian-networks.git' 
 
 LICENSE = 'MIT' #Tipo de licencia
 DESCRIPTION = 'Permite el manejo y construccion de Redes Bayesianas' #Descripción corta
@@ -15,7 +15,7 @@ LONG_DESCRIPTION = (HERE / "README.md").read_text(encoding='utf-8') #Referencia 
 LONG_DESC_TYPE = "text/markdown"
 
 
-#Paquetes necesarios para que funcione la libreía. Se instalarán a la vez si no lo tuvieras ya instalado
+#Paquetes necesarios para que funcione la libreía. Se instalarán en el caso de que no esten instalados
 INSTALL_REQUIRES = [
       'pgmpy'
       ]
