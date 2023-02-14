@@ -1,20 +1,36 @@
-from setuptools import setup, find_packages
+import pathlib
+from setuptools import find_packages, setup
 
-VERSION = "0.0.1"
-DESCRIPTION = "Bayesian networks library"
+HERE = pathlib.Path(__file__).parent
+
+VERSION = '0.0.1' #Muy importante, deberéis ir cambiando la versión de vuestra librería según incluyáis nuevas funcionalidades
+PACKAGE_NAME = 'cool-bayesian-networks' #Debe coincidir con el nombre de la carpeta 
+AUTHOR = 'Pedro Arriola, Oscar López, Yong Park & Santiago Taracena' #Modificar con vuestros datos
+AUTHOR_EMAIL = 'tar20017@uvg.edu.gt' #Modificar con vuestros datos
+URL = 'https://github.com/SantiagoTaracena01/cool-bayesian-networks.git' #Modificar con vuestros datos
+
+LICENSE = 'MIT' #Tipo de licencia
+DESCRIPTION = 'Permite el manejo y construccion de Redes Bayesianas' #Descripción corta
+LONG_DESCRIPTION = (HERE / "README.md").read_text(encoding='utf-8') #Referencia al documento README con una descripción más elaborada
+LONG_DESC_TYPE = "text/markdown"
+
+
+#Paquetes necesarios para que funcione la libreía. Se instalarán a la vez si no lo tuvieras ya instalado
+INSTALL_REQUIRES = [
+      'pgmpy'
+      ]
 
 setup(
-    name="cool-bayesian-networks",
+    name=PACKAGE_NAME,
     version=VERSION,
-    author="Pedro Arriola, Oscar López, Yong Park & Santiago Taracena",
-    author_email="<tar20017@uvg.edu.gt>",
     description=DESCRIPTION,
+    long_description=LONG_DESCRIPTION,
+    long_description_content_type=LONG_DESC_TYPE,
+    author=AUTHOR,
+    author_email=AUTHOR_EMAIL,
+    url=URL,
+    install_requires=INSTALL_REQUIRES,
+    license=LICENSE,
     packages=find_packages(),
-    keywords=["python", "bayesian networks", "machine learning", "artificial intelligence"],
-    classifiers=[
-        "Development Status :: 1 - Planning",
-        "Intended Audience :: Developers",
-        "Programming Language :: Python :: 3",
-        "Operating System :: OS Independent",
-    ]
+    include_package_data=True
 )

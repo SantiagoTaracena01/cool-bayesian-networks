@@ -1,1 +1,1 @@
-from main import get_max
+from .bayesian_construct import *
