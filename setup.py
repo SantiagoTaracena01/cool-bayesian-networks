@@ -32,8 +32,9 @@ CLASSIFIERS = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
 ]
+
 setup(
     name=PACKAGE_NAME,
     version=VERSION["__version__"],
@@ -47,4 +48,6 @@ setup(
     license=LICENSE,
     packages=find_packages(),
     include_package_data=True,
+    keywords=KEYWORDS,
+    classifiers=CLASSIFIERS,
 )
