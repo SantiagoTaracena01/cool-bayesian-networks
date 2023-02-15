@@ -24,7 +24,7 @@ LONG_DESC_TYPE = "text/markdown"
 
 
 # Paquetes necesarios para que funcione la libreía. Se instalarán en el caso de que no esten instalados
-INSTALL_REQUIRES = ["pgmpy"]
+INSTALL_REQUIRES = ["build", "pgmpy"]
 
 KEYWORDS = ["bayesian-networks", "artificial-intelligence", "machine-learning"]
 
