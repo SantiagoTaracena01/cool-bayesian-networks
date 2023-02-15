@@ -28,6 +28,12 @@ INSTALL_REQUIRES = ["pgmpy"]
 
 KEYWORDS = ["bayesian-networks", "artificial-intelligence", "machine-learning"]
 
+CLASSIFIERS = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+]
 setup(
     name=PACKAGE_NAME,
     version=VERSION["__version__"],
