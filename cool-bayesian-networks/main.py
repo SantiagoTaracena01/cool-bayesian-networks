@@ -1,3 +1,11 @@
+# Laboratorio 2
+# Inteligencia Artificial
+
+# YongBum Park 20117
+# Santiago Taracena 20017
+# Pedro Arriola 20188
+# Oscar López 20679
+
 from bayesian_construct import *
 
 bayesian = Bayesian()
