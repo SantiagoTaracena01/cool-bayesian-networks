@@ -5,7 +5,7 @@ from cool_bayesian_networks import __version__
 HERE = pathlib.Path(__file__).parent
 
 VERSION = {}
-with open(HERE / "cool_bayesian_networks" / "version.py") as fp:
+with open(HERE / "cool-bayesian-networks" / "version.py") as fp:
     exec(fp.read(), VERSION)
 PACKAGE_NAME = "cool-bayesian-networks"
 AUTHOR = "Pedro Arriola, Oscar López, Yong Park & Santiago Taracena"
