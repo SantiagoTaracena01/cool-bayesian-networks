@@ -26,7 +26,7 @@ bayesian.show_values(cpd_c)
 bayesian.asign_to_model([cpd_a, cpd_b, cpd_c])
 
 # Validity of model
-print(bayesian.check_model())
+# print(bayesian.check_model())
 
 # Nodes and edges
 bayesian.check_edges()
