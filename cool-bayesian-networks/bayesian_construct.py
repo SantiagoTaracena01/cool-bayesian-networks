@@ -36,6 +36,9 @@ class Bayesian(object):
         # Add the conditional probability distributions to the model
         for value in values:
             self.model.add_cpds(value)
+        for ucpd in self.model.get_cpds():
+            if not self.model.check_model(ucpd):
+                print(f"Error al agregar la CPD {ucpd}")
 
     def check_model(self):
         # Check if the model is valid
