@@ -1,9 +1,12 @@
 import pathlib
 from setuptools import find_packages, setup
+from cool_bayesian_networks import __version__
 
 HERE = pathlib.Path(__file__).parent
 
-VERSION = "0.0.1"
+VERSION = {}
+with open(HERE / "cool_bayesian_networks" / "version.py") as fp:
+    exec(fp.read(), VERSION)
 PACKAGE_NAME = "cool-bayesian-networks"
 AUTHOR = "Pedro Arriola, Oscar López, Yong Park & Santiago Taracena"
 AUTHOR_EMAIL = "tar20017@uvg.edu.gt"
@@ -13,6 +16,7 @@ LICENSE = "MIT"  # Tipo de licencia
 DESCRIPTION = (
     "Permite el manejo y construccion de Redes Bayesianas"  # Descripción corta
 )
+
 LONG_DESCRIPTION = (HERE / "README.md").read_text(
     encoding="utf-8"
 )  # Referencia al documento README con una descripción más elaborada
@@ -24,7 +28,7 @@ INSTALL_REQUIRES = ["pgmpy"]
 
 setup(
     name=PACKAGE_NAME,
-    version=VERSION,
+    version=VERSION["__version__"],
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     long_description_content_type=LONG_DESC_TYPE,
