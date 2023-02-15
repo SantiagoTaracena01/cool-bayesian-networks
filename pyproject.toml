@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cool-bayesian-networks"
-version = "0.2.2"
+version = "0.0.0"
 description = "This package serves as a Bayesian Network builder"
 authors = [
     "Pedro Arriola",
