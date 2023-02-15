@@ -38,6 +38,9 @@ class Bayesian(object):
     def asign_to_model(self, values):
         for value in values:
             self.model.add_cpds(value)
+        for ucpd in self.model.get_cpds():
+            if not self.model.check_model(ucpd):
+                print(f"Error al agregar la CPD {ucpd}")
 
     # Verificación del modelo
     def check_model(self):
